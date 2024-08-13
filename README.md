@@ -1,2 +1,3 @@
-# bat
-🦇 Bat
+# :bat: Bat
+
+Bevy Game Template
