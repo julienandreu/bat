@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy_ecs_ldtk::prelude::*;
 
 use crate::{
     input::{
@@ -12,6 +13,7 @@ use super::components::*;
 pub fn on_enter(
     mut commands: Commands,
     query: Query<Entity, With<SplashScreen>>,
+    asset_server: Res<AssetServer>,
 ) {
     info!("OnEnter Splash Screen");
 
@@ -20,8 +22,13 @@ pub fn on_enter(
         commands.entity(e).despawn_recursive();
     }
 
+    let ldtk_handle = asset_server.load("levels/splash-screen.ldtk");
     commands.spawn(SplashScreenBundle {
         name: Name::new("SplashScreen"),
+        ldtk_world_bundle: LdtkWorldBundle {
+            ldtk_handle,
+            ..Default::default()
+        },
         ..default()
     });
 }
