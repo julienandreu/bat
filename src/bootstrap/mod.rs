@@ -17,7 +17,7 @@ impl Plugin for BootstrapPlugin {
     fn build(&self, app: &mut App) {
         let (physical_width, physical_height) = INITIAL_PHYSICAL_SIZE;
 
-        app.add_plugins((
+        app.insert_resource(Msaa::Off).add_plugins((
             DefaultPlugins.set(ImagePlugin::default_nearest()).set(
                 WindowPlugin {
                     primary_window: Some(Window {

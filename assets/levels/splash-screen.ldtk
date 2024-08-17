@@ -415,7 +415,7 @@
 						},
 						{
 							"__identifier": "Pole",
-							"__grid": [23,5],
+							"__grid": [15,5],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": { "tilesetUid": 9, "x": 0, "y": 0, "w": 24, "h": 24 },
@@ -424,9 +424,9 @@
 							"width": 24,
 							"height": 24,
 							"defUid": 8,
-							"px": [368,80],
+							"px": [240,80],
 							"fieldInstances": [],
-							"__worldX": 176,
+							"__worldX": 48,
 							"__worldY": 160
 						}
 					]

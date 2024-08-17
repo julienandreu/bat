@@ -4,7 +4,7 @@ use bevy_ecs_ldtk::prelude::*;
 use components::*;
 use systems::*;
 
-use super::AppState;
+use crate::states::components::AppState;
 
 pub mod components;
 mod systems;

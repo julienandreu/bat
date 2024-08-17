@@ -12,8 +12,8 @@ use super::components::*;
 
 pub fn on_enter(
     mut commands: Commands,
-    query: Query<Entity, With<SplashScreen>>,
     asset_server: Res<AssetServer>,
+    query: Query<Entity, With<SplashScreen>>,
 ) {
     info!("OnEnter Splash Screen");
 

@@ -5,15 +5,14 @@ use bevy::prelude::*;
 use bevy::time::common_conditions::on_timer;
 use bevy_ecs_ldtk::prelude::*;
 use components::*;
-use julien::*;
-use pole::*;
 use systems::*;
+
+use crate::entities::characters::julien::JulienPlugin;
+use crate::entities::props::pole::PolePlugin;
 
 use super::AppState;
 
 pub mod components;
-mod julien;
-mod pole;
 mod systems;
 
 pub struct SplashScreenStatePlugin;
