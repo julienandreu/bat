@@ -2,8 +2,8 @@ use bevy::prelude::*;
 
 #[derive(Debug, Default)]
 pub enum ResizeMode {
-    Contain,
     #[default]
+    Contain,
     Cover,
 }
 

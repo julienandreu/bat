@@ -12,12 +12,3 @@ pub struct PoleBundle {
     #[grid_coords]
     pub grid_coords: GridCoords,
 }
-
-#[derive(Component, Debug)]
-pub struct AnimationIndices {
-    pub first: usize,
-    pub last: usize,
-}
-
-#[derive(Component, Deref, DerefMut)]
-pub struct AnimationTimer(pub Timer);

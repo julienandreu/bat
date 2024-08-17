@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::animation::components::{AnimationIndices, AnimationTimer};
+
 use super::components::*;
 
 const ANIMATION_FPS: f32 = 8.;

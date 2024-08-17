@@ -1,8 +1,49 @@
 use bevy::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
 
+use crate::animation::components::{AnimationIndices, AnimationTimer};
+
+#[derive(Debug, Default)]
+pub enum EntityState {
+    #[default]
+    Idle,
+    Walk,
+    ThumbUp,
+}
+
 #[derive(Default, Component)]
-pub struct Julien;
+pub struct Julien {
+    pub current_state: EntityState,
+}
+
+impl From<&Julien> for AnimationIndices {
+    fn from(val: &Julien) -> Self {
+        match val.current_state {
+            EntityState::Idle => AnimationIndices { first: 0, last: 1 },
+            EntityState::Walk => {
+                AnimationIndices { first: 7, last: 10 }
+            }
+            EntityState::ThumbUp => AnimationIndices {
+                first: 14,
+                last: 20,
+            },
+        }
+    }
+}
+
+impl From<&Julien> for AnimationTimer {
+    fn from(val: &Julien) -> Self {
+        let duration = match val.current_state {
+            EntityState::Idle => 0.256,
+            _ => 0.128,
+        };
+
+        AnimationTimer(Timer::from_seconds(
+            duration,
+            TimerMode::Repeating,
+        ))
+    }
+}
 
 #[derive(Default, Bundle, LdtkEntity)]
 pub struct JulienBundle {
@@ -12,12 +53,3 @@ pub struct JulienBundle {
     #[grid_coords]
     pub grid_coords: GridCoords,
 }
-
-#[derive(Component, Debug)]
-pub struct AnimationIndices {
-    pub first: usize,
-    pub last: usize,
-}
-
-#[derive(Component, Deref, DerefMut)]
-pub struct AnimationTimer(pub Timer);

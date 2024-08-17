@@ -3,6 +3,7 @@
 // This is not a library, so we don't need to worry about intra-doc links
 #![allow(rustdoc::private_intra_doc_links)]
 
+pub mod animation;
 pub mod bootstrap;
 pub mod camera;
 pub mod entities;

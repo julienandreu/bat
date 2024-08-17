@@ -1,31 +1,31 @@
 use bevy::prelude::*;
 
-use super::components::*;
+use crate::animation::components::{AnimationIndices, AnimationTimer};
 
-const ANIMATION_FPS: f32 = 8.;
+use super::components::*;
 
 pub fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
     query: Query<
-        (Entity, &Transform),
-        (With<Julien>, Without<AnimationIndices>),
+        (Entity, &Julien, &Transform),
+        Without<AnimationIndices>,
     >,
 ) {
-    if let Ok((e, t)) = query.get_single() {
+    if let Ok((e, j, t)) = query.get_single() {
         info!("Setup Julien animation on {:?}", e);
         let texture =
             asset_server.load("sprites/too-bearded/julien.png");
         let layout = TextureAtlasLayout::from_grid(
             UVec2::splat(24),
-            8,
-            1,
+            7,
+            3,
             None,
             None,
         );
         let texture_atlas_layout = texture_atlas_layouts.add(layout);
-        let animation_indices = AnimationIndices { first: 0, last: 3 };
+        let animation_indices = AnimationIndices::from(j);
         commands.entity(e).despawn_descendants().insert((
             Name::new("Julien"),
             SpriteBundle {
@@ -38,10 +38,7 @@ pub fn setup(
                 index: animation_indices.first,
             },
             animation_indices,
-            AnimationTimer(Timer::from_seconds(
-                1. / ANIMATION_FPS,
-                TimerMode::Repeating,
-            )),
+            AnimationTimer::from(j),
         ));
     }
 }
