@@ -12,7 +12,9 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(InputManagerPlugin::<Action>::default())
+            .add_event::<JumpEvent>()
+            .add_event::<ToggleEvent>()
             .init_resource::<JoinedPlayers>()
-            .add_systems(Update, (join, jump, disconnect));
+            .add_systems(Update, (join, jump, toggle, disconnect));
     }
 }

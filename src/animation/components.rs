@@ -7,4 +7,6 @@ pub struct AnimationIndices {
 }
 
 #[derive(Component, Deref, DerefMut)]
-pub struct AnimationTimer(pub Timer);
+pub struct AnimationTimer {
+    pub timer: Timer,
+}

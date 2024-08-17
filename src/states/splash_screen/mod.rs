@@ -29,7 +29,8 @@ impl Plugin for SplashScreenStatePlugin {
             .add_systems(
                 Update,
                 (
-                    next_state.run_if(in_state(AppState::SplashScreen)),
+                    (toggle, thumb_up, next_state)
+                        .run_if(in_state(AppState::SplashScreen)),
                     activate
                         .run_if(on_timer(Duration::from_millis(250))),
                 ),

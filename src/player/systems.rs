@@ -11,7 +11,7 @@ use leafwing_input_manager::{
 
 use crate::player::{Action, Player};
 
-use super::JoinedPlayers;
+use super::{JoinedPlayers, JumpEvent, ToggleEvent};
 
 pub fn join(
     mut commands: Commands,
@@ -48,6 +48,7 @@ pub fn join(
 
                 let input_map = InputMap::new([
                     (Action::Jump, GamepadButtonType::South),
+                    (Action::Toggle, GamepadButtonType::North),
                     (Action::Disconnect, GamepadButtonType::Select),
                 ])
                 // Make sure to set the gamepad or all gamepads will be used!
@@ -67,21 +68,38 @@ pub fn join(
     }
 }
 
-pub fn jump(action_query: Query<(&ActionState<Action>, &Player)>) {
+pub fn jump(
+    mut ev: EventWriter<JumpEvent>,
+    query: Query<(&ActionState<Action>, &Player)>,
+) {
     // Iterate through each player to see if they jumped
-    for (action_state, player) in action_query.iter() {
+    for (action_state, player) in query.iter() {
         if action_state.just_pressed(&Action::Jump) {
             info!("Player {} jumped!", player.gamepad.id);
+            ev.send(JumpEvent);
+        }
+    }
+}
+
+pub fn toggle(
+    mut ev: EventWriter<ToggleEvent>,
+    query: Query<(&ActionState<Action>, &Player)>,
+) {
+    // Iterate through each player to see if they jumped
+    for (action_state, player) in query.iter() {
+        if action_state.just_pressed(&Action::Toggle) {
+            info!("Player {} toggle!", player.gamepad.id);
+            ev.send(ToggleEvent);
         }
     }
 }
 
 pub fn disconnect(
     mut commands: Commands,
-    action_query: Query<(&ActionState<Action>, &Player)>,
+    query: Query<(&ActionState<Action>, &Player)>,
     mut joined_players: ResMut<JoinedPlayers>,
 ) {
-    for (action_state, player) in action_query.iter() {
+    for (action_state, player) in query.iter() {
         if action_state.pressed(&Action::Disconnect) {
             let player_entity =
                 *joined_players.0.get(&player.gamepad).unwrap();

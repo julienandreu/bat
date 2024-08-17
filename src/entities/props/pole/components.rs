@@ -14,7 +14,9 @@ impl From<&Pole> for AnimationIndices {
 
 impl From<&Pole> for AnimationTimer {
     fn from(_val: &Pole) -> Self {
-        AnimationTimer(Timer::from_seconds(0.128, TimerMode::Repeating))
+        AnimationTimer {
+            timer: Timer::from_seconds(0.128, TimerMode::Repeating),
+        }
     }
 }
 

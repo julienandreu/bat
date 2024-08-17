@@ -5,6 +5,7 @@ use leafwing_input_manager::prelude::*;
     Actionlike, PartialEq, Eq, Clone, Copy, Hash, Debug, Reflect,
 )]
 pub enum Action {
+    Toggle,
     Jump,
     Disconnect,
 }
@@ -18,3 +19,9 @@ pub struct Player {
     // This gamepad is used to index each player
     pub gamepad: Gamepad,
 }
+
+#[derive(Debug, Event)]
+pub struct JumpEvent;
+
+#[derive(Debug, Event)]
+pub struct ToggleEvent;

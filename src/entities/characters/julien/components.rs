@@ -35,13 +35,13 @@ impl From<&Julien> for AnimationTimer {
     fn from(val: &Julien) -> Self {
         let duration = match val.current_state {
             EntityState::Idle => 0.256,
-            _ => 0.128,
+            EntityState::Walk => 0.128,
+            EntityState::ThumbUp => 0.128,
         };
 
-        AnimationTimer(Timer::from_seconds(
-            duration,
-            TimerMode::Repeating,
-        ))
+        AnimationTimer {
+            timer: Timer::from_seconds(duration, TimerMode::Repeating),
+        }
     }
 }
 
