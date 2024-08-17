@@ -7,6 +7,7 @@ use crate::camera::CameraPlugin;
 use crate::input::InputPlugin;
 use crate::performance::PerformancePlugin;
 use crate::physics::PhysicsPlugin;
+use crate::player::PlayerPlugin;
 use crate::states::StatesPlugin;
 
 const INITIAL_PHYSICAL_SIZE: (f32, f32) = (1280., 768.);
@@ -41,6 +42,7 @@ impl Plugin for BootstrapPlugin {
             InputPlugin,
             StatesPlugin,
             AnimationPlugin,
+            PlayerPlugin,
         ));
     }
 }

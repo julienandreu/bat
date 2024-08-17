@@ -10,4 +10,5 @@ pub mod entities;
 pub mod input;
 pub mod performance;
 pub mod physics;
+pub mod player;
 pub mod states;
