@@ -15,7 +15,7 @@ impl Plugin for PolePlugin {
     fn build(&self, app: &mut App) {
         app.register_ldtk_entity::<PoleBundle>("Pole").add_systems(
             Update,
-            (setup, render).run_if(in_state(AppState::SplashScreen)),
+            setup.run_if(in_state(AppState::SplashScreen)),
         );
     }
 }

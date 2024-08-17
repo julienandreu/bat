@@ -16,8 +16,7 @@ impl Plugin for JulienPlugin {
         app.register_ldtk_entity::<JulienBundle>("Julien")
             .add_systems(
                 Update,
-                (setup, render)
-                    .run_if(in_state(AppState::SplashScreen)),
+                setup.run_if(in_state(AppState::SplashScreen)),
             );
     }
 }

@@ -2,6 +2,7 @@ use bevy::app::App;
 use bevy::prelude::*;
 use bevy::window::{WindowMode, WindowResolution};
 
+use crate::animation::AnimationPlugin;
 use crate::camera::CameraPlugin;
 use crate::input::InputPlugin;
 use crate::performance::PerformancePlugin;
@@ -39,6 +40,7 @@ impl Plugin for BootstrapPlugin {
             PhysicsPlugin,
             InputPlugin,
             StatesPlugin,
+            AnimationPlugin,
         ));
     }
 }
