@@ -3,7 +3,7 @@ authors = ["Julien Andreu <julienandreu@me.com>"]
 categories = ["game-development"]
 description = ""
 edition = "2021"
-#exclude = ["assets/"]
+exclude = ["assets/"]
 homepage = "https://github.com/julienandreu/bat"
 keywords = ["gamedev", "bevy", "game"]
 license = "Apache-2.0"
@@ -12,13 +12,14 @@ repository = "https://github.com/julienandreu/bat"
 version = "0.1.0"
 
 [features]
-default = ["dev"]
+default = ["release"]
 dev = ["bevy/file_watcher", "bevy/dynamic_linking"]
 tracing = ["bevy/trace_chrome"]
+release = []
 
 [dependencies.bevy]
 version = "0.14"
-features = ["dynamic_linking", "png"]
+features = ["png"]
 
 [dependencies]
 # keep the following in sync with Bevy's dependencies
@@ -27,7 +28,11 @@ image = { version = "0.25", default-features = false }
 ## This greatly improves WGPU's performance due to its heavy use of trace! calls
 log = { version = "0.4", features = [
   "max_level_debug",
-  "release_max_level_warn",
+  "release_max_level_off",
+] }
+tracing = { version = "0.1", features = [
+  "max_level_debug",
+  "release_max_level_off",
 ] }
 
 # generic dependencies
@@ -35,12 +40,13 @@ serde = { version = "1", features = ["derive"] }
 anyhow = "1"
 
 # Bevy plugins
-bevy_ecs_ldtk = "0.10.0"
+bevy_ecs_ldtk = "0.10"
 bevy_egui = "0.28"                                                               # version governed by bevy_editor_pls and leafwing-input-manager
 bevy_rapier2d = { version = "*", features = ["simd-stable", "debug-render-2d"] }
-leafwing-input-manager = "0.15.0"
-rand = "0.8.5"
-iyes_perf_ui = "0.3.0"
+leafwing-input-manager = "0.15"
+rand = "0.8"
+iyes_perf_ui = "0.3"
+bevy_embedded_assets = "0.11.0"
 
 [build-dependencies]
 embed-resource = "2"
